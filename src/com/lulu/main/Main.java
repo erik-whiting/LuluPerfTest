@@ -1,5 +1,6 @@
 package com.lulu.main;
 
+import com.lulu.main.java.models.monitors.*;
 import com.lulu.main.java.models.UseCase;
 import com.lulu.main.java.models.UseCases;
 import com.lulu.main.java.models.UserGroup;
@@ -8,10 +9,27 @@ import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        // For future prototyping
         String sut_url = "http://127.0.0.1:5000/";
         UserGroup customers = makeCustomerUserGroup();
         UserGroup employees = makeEmployeeUserGroup();
+
+        // Monitor Prototype
+        MemoryMonitor memoryMonitor = new MemoryMonitor("Memory", 500);
+        DiskSpaceMonitor diskSpaceMonitor = new DiskSpaceMonitor("Disk Space", 500, "C:\\");
+        CpuMonitor cpuMonitor = new CpuMonitor("CPU", 500);
+
+        ArrayList<MetricMonitor> monitorList = new ArrayList<>();
+        monitorList.add(memoryMonitor);
+        monitorList.add(diskSpaceMonitor);
+        monitorList.add(cpuMonitor);
+        Monitors monitors = new Monitors(monitorList);
+
+        monitors.start();
+        Thread.sleep(10000);
+        System.out.println("Stopping thread");
+        monitors.stopMonitoring();
     }
 
     public static UserGroup makeCustomerUserGroup() {

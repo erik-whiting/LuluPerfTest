@@ -1,4 +1,4 @@
-package com.lulu.main.java.models;
+package com.lulu.main.java.models.monitors;
 
 import java.io.File;
 
@@ -8,6 +8,7 @@ public class DiskSpaceMonitor extends MetricMonitor {
         this.name = name;
         this.metricCheckingFrequency = metricCheckingFreq;
         this.directory = dirToMonitor;
+        this.metric = Metric.DISKSPACE;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.lulu.main.java.models;
+package com.lulu.main.java.models.monitors;
 
 import com.sun.management.OperatingSystemMXBean;
 
@@ -9,6 +9,7 @@ public class CpuMonitor extends MetricMonitor {
     public CpuMonitor(String name, int metricCheckingFreq) {
         this.name = name;
         this.metricCheckingFrequency = metricCheckingFreq;
+        this.metric = Metric.CPU;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.lulu.main.java.models;
+package com.lulu.main.java.models.monitors;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,6 +10,7 @@ public class OtherMonitor extends MetricMonitor {
         this.name = name;
         this.metricCheckingFrequency = metricCheckingFreq;
         this.sysCommandForMetric = command;
+        this.metric = Metric.OTHER;
     }
 
     @Override
