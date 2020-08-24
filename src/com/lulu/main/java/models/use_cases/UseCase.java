@@ -1,37 +1,42 @@
-package com.lulu.main.java.models;
+package com.lulu.main.java.models.use_cases;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class UseCase extends Thread {
+public class UseCase {
     public String name;
     public Path pathToScript;
     public String cmdToRunScript;
+    public int numOfThreads;
+    public ArrayList<RunnableUseCase> runnableUseCases = new ArrayList<>();
 
-    public UseCase(String name, String pathToScript, String cmdToRunScript) {
+    public UseCase(String name, String pathToScript, String cmdToRunScript, int numOfThreads) {
         this.name = name;
         this.pathToScript = Paths.get(pathToScript);
         this.cmdToRunScript = cmdToRunScript;
+        this.numOfThreads = numOfThreads;
     }
 
     public void run() {
-        String execution_script = cmdToRunScript + " " + pathToScript;
-        try {
-            Process p = Runtime.getRuntime().exec(execution_script);
-            HashMap<String, BufferedReader> streamHash = getStreams(p);
-            reportStreams(streamHash);
-        } catch (IOException e) {
-            long threadId = Thread.currentThread().getId();
-            System.out.println("Script " + name + ", thread ID: " + threadId + " has failed");
-            e.printStackTrace();
+        setRunnableUseCases();
+        System.out.println("Preparing " + name + " threads");
+        for (RunnableUseCase ruc : runnableUseCases) {
+            Thread t = new Thread(ruc, ruc.name);
+            t.start();
         }
     }
 
-    private static HashMap<String, BufferedReader> getStreams(Process p) {
+    public boolean isRunning() {
+        for (RunnableUseCase ruc : runnableUseCases) if(!ruc.isRunning) return false;
+        return true;
+    }
+
+    public static HashMap<String, BufferedReader> getStreams(Process p) {
         BufferedReader standardInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
         BufferedReader standardError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
         HashMap<String, BufferedReader> streamHash = new HashMap<>();
@@ -40,7 +45,7 @@ public class UseCase extends Thread {
         return streamHash;
     }
 
-    private static void reportStreams(HashMap<String, BufferedReader> streamHash) throws IOException {
+    public static void reportStreams(HashMap<String, BufferedReader> streamHash) throws IOException {
         String s;
         while ((s = streamHash.get("Input").readLine()) != null) {
             System.out.println("Output:");
@@ -49,6 +54,14 @@ public class UseCase extends Thread {
         while ((s = streamHash.get("Error").readLine()) != null) {
             System.out.println("Error:");
             System.out.println(s);
+        }
+    }
+
+    private void setRunnableUseCases() {
+        for (int i = 1; i <= numOfThreads; i++) {
+            String threadName = name + i;
+            RunnableUseCase ruc = new RunnableUseCase(threadName, pathToScript, cmdToRunScript);
+            runnableUseCases.add(ruc);
         }
     }
 }
