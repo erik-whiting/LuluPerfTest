@@ -10,4 +10,6 @@ public class UserGroup {
         this.name = name;
         this.useCases = useCases;
     }
+
+    public void runUseCases() throws InterruptedException { useCases.start(); }
 }

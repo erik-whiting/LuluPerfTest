@@ -1,9 +1,9 @@
 package com.lulu.main.java.models.use_cases;
 
+import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.HashMap;
 
 public class RunnableUseCase implements Runnable {
     String name;
@@ -20,8 +20,13 @@ public class RunnableUseCase implements Runnable {
         System.out.println("Running \"" + executionScript + "\"");
         try {
             Process p = Runtime.getRuntime().exec(executionScript);
-            HashMap<String, BufferedReader> streamHash = UseCase.getStreams(p);
-            UseCase.reportStreams(streamHash);
+            try (BufferedReader standardError = new BufferedReader(new InputStreamReader(p.getErrorStream()))) {
+                String s;
+                while ((s = standardError.readLine()) != null) {
+                    System.out.println("Error:");
+                    System.out.println(s);
+                }
+            }
         } catch (IOException e) {
             long threadId = Thread.currentThread().getId();
             System.out.println("Script " + name + ", thread ID: " + threadId + " has failed");
