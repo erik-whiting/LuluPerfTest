@@ -1,0 +1,17 @@
+Performance Test:
+  User Group:
+    name: Default
+    use cases:
+      Explore Albums:
+        script: C:\Users\eedee\Documents\test_site_tests\customer_user_group\explore_albums.py
+        command: python
+        threads: 2
+      Explore Bands:
+        script: C:\Users\eedee\Documents\test_site_tests\customer_user_group\explore_bands.py
+        command: python
+        threads: 2
+  Monitors:
+    Memory:
+      Every: 500
+    CPU:
+      Every: 500
