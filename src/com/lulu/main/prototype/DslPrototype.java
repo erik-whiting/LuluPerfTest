@@ -1,6 +1,6 @@
 package com.lulu.main.prototype;
 
-import com.lulu.main.java.models.DslParser;
+import com.lulu.main.java.models.dsl.DslParser;
 import com.lulu.main.java.models.monitors.Monitors;
 import com.lulu.main.java.models.use_cases.UseCases;
 

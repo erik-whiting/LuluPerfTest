@@ -1,9 +1,8 @@
-package com.lulu.main.java.models;
+package com.lulu.main.java.models.dsl;
 
 import com.lulu.main.java.models.monitors.*;
 import com.lulu.main.java.models.use_cases.UseCase;
 import com.lulu.main.java.models.use_cases.UseCases;
-import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -16,18 +15,29 @@ import java.util.ArrayList;
 public class DslParser {
     public Monitors monitors;
     public UseCases useCases;
-    public DslParser(String path) throws IOException {
+    public DslParser(String path) {
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(path)) {
             Object obj = jsonParser.parse(reader);
             JSONObject script = (JSONObject) obj;
             buildTest(script);
-        } catch (ParseException | IOException | JSONException e) {
+        } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void buildTest(JSONObject script) throws JSONException {
+    public void run() {
+        this.monitors.start();
+        if (this.useCases.isRunning) {
+            useCases.start();
+        }
+        while (!this.useCases.isRunning()) {
+            System.out.println("What do I put here?");
+        }
+        this.monitors.stopMonitoring();
+    }
+
+    private void buildTest(JSONObject script) {
         ArrayList<UseCase> useCases = new ArrayList<>();
         ArrayList<MetricMonitor> metricMonitors = new ArrayList<>();
 
