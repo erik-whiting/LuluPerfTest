@@ -15,6 +15,9 @@ public class DslPrototype {
 
         monitors.start();
         useCases.start();
+        while (!useCases.doneRunning()) {
+            Thread.sleep(100);
+        }
         monitors.stopMonitoring();
     }
 }

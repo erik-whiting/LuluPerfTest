@@ -26,13 +26,11 @@ public class DslParser {
         }
     }
 
-    public void run() {
+    public void run() throws InterruptedException {
         this.monitors.start();
-        if (this.useCases.isRunning) {
-            useCases.start();
-        }
-        while (!this.useCases.isRunning()) {
-            System.out.println("What do I put here?");
+        this.useCases.start();
+        while (this.useCases.isRunning()) {
+            Thread.sleep(100);
         }
         this.monitors.stopMonitoring();
     }

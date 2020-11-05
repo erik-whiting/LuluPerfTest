@@ -1,9 +1,12 @@
 package com.lulu.main;
 
+import com.lulu.main.java.models.dsl.DslRunner;
+
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
-        // For future prototyping
-        String sut_url = "http://127.0.0.1:5000/";
+    public static void main(String[] args)  {
+        for (String s : args) {
+            new DslRunner(s);
+        }
     }
 }
