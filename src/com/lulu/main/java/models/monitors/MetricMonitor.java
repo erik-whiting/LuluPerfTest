@@ -1,5 +1,7 @@
 package com.lulu.main.java.models.monitors;
 
+import java.lang.management.ManagementFactory;
+import java.math.MathContext;
 import java.util.HashMap;
 
 public abstract class MetricMonitor implements Monitoring, Runnable {
@@ -9,6 +11,8 @@ public abstract class MetricMonitor implements Monitoring, Runnable {
     public String sysCommandForMetric;
     public volatile boolean isMonitoring;
     public Metric metric;
+    public MathContext scale = new MathContext(5);
+    public com.sun.management.OperatingSystemMXBean os = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 
     public void run() {
         isMonitoring = true;
