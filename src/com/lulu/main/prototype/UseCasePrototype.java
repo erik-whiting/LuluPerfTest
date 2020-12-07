@@ -14,7 +14,7 @@ public class UseCasePrototype {
         UseCases useCases = new UseCases(new ArrayList<>() {
             {
                 add(new UseCase("Explore Albums (python)", customerUcScript1, "python", 1));
-                add(new UseCase("Explore Albums (ruby)", customerUcScript2, "ruby", 2));
+//                add(new UseCase("Explore Albums (ruby)", customerUcScript2, "ruby", 2));
             }
         });
 

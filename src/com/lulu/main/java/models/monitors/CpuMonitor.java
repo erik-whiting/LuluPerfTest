@@ -1,11 +1,8 @@
 package com.lulu.main.java.models.monitors;
 
-import com.sun.management.OperatingSystemMXBean;
-
-import java.lang.management.ManagementFactory;
+import java.math.BigDecimal;
 
 public class CpuMonitor extends MetricMonitor {
-
     public CpuMonitor(String name, int metricCheckingFreq) {
         this.name = name;
         this.metricCheckingFrequency = metricCheckingFreq;
@@ -14,7 +11,7 @@ public class CpuMonitor extends MetricMonitor {
 
     @Override
     public double monitor() {
-        OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
-        return osBean.getProcessCpuLoad();
+        double ratio = os.getSystemCpuLoad();
+        return BigDecimal.valueOf(ratio*100).round(this.scale).doubleValue();
     }
 }
