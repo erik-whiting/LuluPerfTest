@@ -1,5 +1,8 @@
 package com.lulu.main.java.models.monitors;
 
+import com.lulu.main.java.models.reporters.MonitorOutputReceiver;
+import com.lulu.main.java.models.reporters.MonitorOutputTransmitter;
+
 import java.lang.management.ManagementFactory;
 import java.math.MathContext;
 import java.util.HashMap;
@@ -16,6 +19,7 @@ public abstract class MetricMonitor implements Monitoring, Runnable {
 
     public void run() {
         isMonitoring = true;
+        long monitorIteration = 1;
         while (isMonitoring) {
             try {
                 Thread.sleep(metricCheckingFrequency);
@@ -23,7 +27,15 @@ public abstract class MetricMonitor implements Monitoring, Runnable {
                 Thread.currentThread().interrupt();
                 e.printStackTrace();
             }
-            System.out.println(monitor());
+            MonitorOutputReceiver mor = new MonitorOutputReceiver(
+                    Thread.currentThread().getId(),
+                    monitorIteration,
+                    this.threadName(),
+                    monitor()
+            );
+            MonitorOutputTransmitter transmitter = new MonitorOutputTransmitter(mor);
+            monitorIteration++;
+            System.out.println(transmitter.transmitAsJSON());
         }
     }
 
