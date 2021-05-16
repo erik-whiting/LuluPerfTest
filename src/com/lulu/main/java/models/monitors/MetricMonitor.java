@@ -1,7 +1,8 @@
 package com.lulu.main.java.models.monitors;
 
-import com.lulu.main.java.models.reporters.MonitorOutputReceiver;
-import com.lulu.main.java.models.reporters.MonitorOutputTransmitter;
+import com.lulu.main.java.models.reporters.MonitorOutputSignal;
+import com.lulu.main.java.models.reporters.MonitorOutputDataAdapter;
+import com.lulu.main.java.models.reporters.MonitorOutputTransceiver;
 
 import java.lang.management.ManagementFactory;
 import java.math.MathContext;
@@ -15,6 +16,7 @@ public abstract class MetricMonitor implements Monitoring, Runnable {
     public volatile boolean isMonitoring;
     public Metric metric;
     public MathContext scale = new MathContext(5);
+    public volatile MonitorOutputTransceiver transceiver = new MonitorOutputTransceiver();
     public com.sun.management.OperatingSystemMXBean os = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 
     public void run() {
@@ -27,21 +29,20 @@ public abstract class MetricMonitor implements Monitoring, Runnable {
                 Thread.currentThread().interrupt();
                 e.printStackTrace();
             }
-            MonitorOutputReceiver mor = new MonitorOutputReceiver(
+            this.transceiver.receiveSignal(
                     Thread.currentThread().getId(),
                     monitorIteration,
                     this.threadName(),
                     monitor()
             );
-            MonitorOutputTransmitter transmitter = new MonitorOutputTransmitter(mor);
             monitorIteration++;
-            System.out.println(transmitter.transmitAsJSON());
         }
     }
 
     public void stopMonitoring() {
         isMonitoring = false;
         System.out.println(this.name + " Received stop command");
+        this.transceiver.transmit();
     }
 
     public String threadName() {

@@ -4,23 +4,23 @@ import org.json.simple.JSONObject;
 
 import java.util.HashMap;
 
-public class MonitorOutputTransmitter {
+public class MonitorOutputDataAdapter {
     public HashMap<String, Object> transmissionData;
 
-    public MonitorOutputTransmitter(MonitorOutputReceiver receiver) {
+    public MonitorOutputDataAdapter(MonitorOutputSignal signal) {
         this.transmissionData = new HashMap<>() {
             {
-                put("threadId", receiver.threadId);
-                put("monitorIteration", receiver.monitorIteration);
-                put("threadName", receiver.threadName);
-                put("data", receiver.data);
+                put("threadId", signal.threadId);
+                put("monitorIteration", signal.monitorIteration);
+                put("threadName", signal.threadName);
+                put("data", signal.data);
             }
         };
     }
 
-    public String transmitAsString() { return this.transmissionData.toString(); }
+    public String renderString() { return this.transmissionData.toString(); }
 
-    public JSONObject transmitAsJSON() {
+    public JSONObject renderJSON() {
         JSONObject json = new JSONObject();
         for (String key : this.transmissionData.keySet()) {
             json.put(key, this.transmissionData.get(key));
@@ -28,7 +28,7 @@ public class MonitorOutputTransmitter {
         return json;
     }
 
-    public String transmitAsSQLInsertValues(boolean castAllValuesToString) {
+    public String renderSQLInsertValuesAllStrings(boolean castAllValuesToString) {
         String insertValues = "";
         insertValues += "\"" + this.transmissionData.get("threadId") + "\"";
         insertValues += ", ";
@@ -41,7 +41,7 @@ public class MonitorOutputTransmitter {
         return insertValues;
     }
 
-    public String transmitAsSQLInsertValues() {
+    public String renderSQLInsertValues() {
         String insertValues = "";
         insertValues += this.transmissionData.get("threadId");
         insertValues += ", ";
