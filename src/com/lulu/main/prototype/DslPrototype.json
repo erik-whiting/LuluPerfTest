@@ -1,6 +1,9 @@
 {
   "Performance Test": {
     "name": "default",
+    "configurations": {
+      "reportType": "string"
+    },
     "useCases": [
       {
         "name": "Explore Albums",

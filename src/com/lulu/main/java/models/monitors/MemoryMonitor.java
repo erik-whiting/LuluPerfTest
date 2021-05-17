@@ -1,13 +1,16 @@
 package com.lulu.main.java.models.monitors;
 
+import com.lulu.main.java.models.configurations.ReporterConfiguration;
+
 import java.math.BigDecimal;
 
 public class MemoryMonitor extends MetricMonitor {
     public double osMemorySize;
 
-    public MemoryMonitor(String name, int metricCheckingFreq) {
+    public MemoryMonitor(String name, int metricCheckingFreq, ReporterConfiguration reporterConfig) {
         this.name = name;
         this.metricCheckingFrequency = metricCheckingFreq;
+        this.reporterConfiguration = reporterConfig;
         this.isMonitoring = false;
         this.metric = Metric.MEMORY;
         this.osMemorySize = os.getTotalPhysicalMemorySize();

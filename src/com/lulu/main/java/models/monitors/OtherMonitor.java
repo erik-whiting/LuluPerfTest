@@ -1,14 +1,17 @@
 package com.lulu.main.java.models.monitors;
 
+import com.lulu.main.java.models.configurations.ReporterConfiguration;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class OtherMonitor extends MetricMonitor {
 
-    public OtherMonitor(String name, int metricCheckingFreq, String command) {
+    public OtherMonitor(String name, int metricCheckingFreq, ReporterConfiguration reporterConfig, String command) {
         this.name = name;
         this.metricCheckingFrequency = metricCheckingFreq;
+        this.reporterConfiguration = reporterConfig;
         this.sysCommandForMetric = command;
         this.metric = Metric.OTHER;
     }
