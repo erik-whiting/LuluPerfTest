@@ -1,5 +1,6 @@
 package com.lulu.main.prototype;
 
+import com.lulu.main.java.models.configurations.ReporterConfiguration;
 import com.lulu.main.java.models.monitors.CpuMonitor;
 import com.lulu.main.java.models.monitors.MemoryMonitor;
 import com.lulu.main.java.models.monitors.MetricMonitor;
@@ -34,8 +35,9 @@ public class UcPlusMetricPrototype {
         });
 
         // Define monitors
-        MemoryMonitor memoryMonitor = new MemoryMonitor("Memory", 500);
-        CpuMonitor cpuMonitor = new CpuMonitor("CPU", 500);
+        ReporterConfiguration reporterConfiguration = new ReporterConfiguration("String");
+        MemoryMonitor memoryMonitor = new MemoryMonitor("Memory", 500, reporterConfiguration);
+        CpuMonitor cpuMonitor = new CpuMonitor("CPU", 500, reporterConfiguration);
         ArrayList<MetricMonitor> monitorList = new ArrayList<>();
         monitorList.add(memoryMonitor);
         monitorList.add(cpuMonitor);

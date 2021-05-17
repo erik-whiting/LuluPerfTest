@@ -1,5 +1,6 @@
 package com.lulu.main.java.models.dsl;
 
+import com.lulu.main.java.models.configurations.ReporterConfiguration;
 import com.lulu.main.java.models.monitors.*;
 import com.lulu.main.java.models.use_cases.UseCase;
 import com.lulu.main.java.models.use_cases.UseCases;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 public class DslParser {
     public Monitors monitors;
     public UseCases useCases;
+    public ReporterConfiguration reporterConfiguration;
+
     public DslParser(String path) {
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(path)) {
@@ -41,6 +44,9 @@ public class DslParser {
 
         JSONObject performanceTest = (JSONObject) script.get("Performance Test");
 
+        JSONObject configsJson = (JSONObject) performanceTest.get("configurations");
+        buildConfigurations(configsJson);
+
         JSONArray useCasesJson = (JSONArray) performanceTest.get("useCases");
         useCasesJson.forEach(uc -> useCases.add(buildUseCase((JSONObject) uc)));
 
@@ -49,6 +55,11 @@ public class DslParser {
 
         this.useCases = new UseCases(useCases);
         this.monitors = new Monitors(metricMonitors);
+    }
+
+    private void buildConfigurations(JSONObject configurationsJson) {
+        String reportType = (String) configurationsJson.get("reportType");
+        this.reporterConfiguration = new ReporterConfiguration(reportType);
     }
 
     private UseCase buildUseCase(JSONObject useCaseJson) {
@@ -66,15 +77,15 @@ public class DslParser {
         int interval = Integer.parseInt(stringInterval);
         switch(name) {
             case "memory":
-                return new MemoryMonitor(name, interval);
+                return new MemoryMonitor(name, interval, this.reporterConfiguration);
             case "CPU":
-                return new CpuMonitor(name, interval);
+                return new CpuMonitor(name, interval, this.reporterConfiguration);
             case "disk":
                 String dirToMonitor = (String) monitorJson.get("directory");
-                return new DiskSpaceMonitor(name, interval, dirToMonitor);
+                return new DiskSpaceMonitor(name, interval, this.reporterConfiguration, dirToMonitor);
             default:
                 String command = (String) monitorJson.get("command");
-                return new OtherMonitor(name, interval, command);
+                return new OtherMonitor(name, interval, this.reporterConfiguration, command);
         }
     }
 }

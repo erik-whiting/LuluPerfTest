@@ -10,10 +10,6 @@ public class DslPrototype {
     public static void main(String[] args) throws IOException, InterruptedException {
         String pathToJSON = "C:\\Users\\eedee\\technicalstuff\\javastuff\\LuluPerfTest\\src\\com\\lulu\\main\\prototype\\DslPrototype.json";
         DslParser parser = new DslParser(pathToJSON);
-        Monitors monitors = parser.monitors;
-        UseCases useCases = parser.useCases;
-
-        monitors.start();
-        useCases.start();
+        parser.run();
     }
 }

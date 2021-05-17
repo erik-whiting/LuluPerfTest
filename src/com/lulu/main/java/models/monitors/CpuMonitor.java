@@ -1,11 +1,14 @@
 package com.lulu.main.java.models.monitors;
 
+import com.lulu.main.java.models.configurations.ReporterConfiguration;
+
 import java.math.BigDecimal;
 
 public class CpuMonitor extends MetricMonitor {
-    public CpuMonitor(String name, int metricCheckingFreq) {
+    public CpuMonitor(String name, int metricCheckingFreq, ReporterConfiguration reporterConfig) {
         this.name = name;
         this.metricCheckingFrequency = metricCheckingFreq;
+        this.reporterConfiguration = reporterConfig;
         this.metric = Metric.CPU;
     }
 
