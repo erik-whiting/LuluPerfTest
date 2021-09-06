@@ -1,4 +1,4 @@
-package test;
+package com.lulu.main;
 
 import com.lulu.main.java.models.configurations.ReporterConfiguration;
 import com.lulu.main.java.models.reporters.ReportType;
