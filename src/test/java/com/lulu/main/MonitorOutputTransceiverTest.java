@@ -3,8 +3,6 @@ package com.lulu.main;
 import com.lulu.main.java.models.configurations.ReporterConfiguration;
 import com.lulu.main.java.models.reporters.MonitorOutputSignal;
 import com.lulu.main.java.models.reporters.MonitorOutputTransceiver;
-import org.hamcrest.CoreMatchers;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -61,23 +59,26 @@ public class MonitorOutputTransceiverTest {
     }
 
     @Test
-    public void transmit() {
-        
-    }
-
-    @Test
     public void translateSignals() {
+        for (MonitorOutputTransceiver transceiver : transceivers) {
+            assertThat(transceiver.adapters.size(), is(0));
+            transceiver.translateSignals();
+            assertThat(transceiver.adapters.size(), is(transceiver.signals.size()));
+        }
     }
 
     @Test
     public void transmitStrings() {
+        // TODO
     }
 
     @Test
     public void transmitToAPI() {
+        // TODO
     }
 
     @Test
     public void transmitToDatabase() {
+        // TODO
     }
 }
