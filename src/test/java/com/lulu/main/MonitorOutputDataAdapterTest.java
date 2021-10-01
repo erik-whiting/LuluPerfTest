@@ -4,7 +4,6 @@ import com.lulu.main.java.models.reporters.MonitorOutputDataAdapter;
 import com.lulu.main.java.models.reporters.MonitorOutputSignal;
 import org.json.simple.JSONObject;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;
