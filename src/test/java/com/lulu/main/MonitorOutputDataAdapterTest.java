@@ -42,22 +42,40 @@ public class MonitorOutputDataAdapterTest {
     }
 
     @Test
-    @Ignore
     public void renderJSON() {
-        // This is a very bizarre test failure. Ignoring until it can be fixed
+        // There is a very weird test failure here
+        // when we pass both JSONObject objects to
+        // assertEquals. The workaroundAssertion
+        // is how we get passed that.
         JSONObject expectedOutput = new JSONObject();
         for (String key : dataHash.keySet()) {
             expectedOutput.put(key, dataHash.get(key));
         }
         JSONObject output = adapter.renderJSON();
-        assertEquals(output, expectedOutput);
+        boolean workaroundAssertion = output.toString().equals(expectedOutput.toString());
+        assertTrue(workaroundAssertion);
     }
 
     @Test
     public void renderSQLInsertValuesAllStrings() {
+        String expectedOutput = "(" + "\""   + threadId   + "\", "
+                                      + "\"" + iteration  + "\", "
+                                      + "\"" + threadName + "\", "
+                                      + "\"" + data       + "\""
+                                      + ")";
+        String actualOutput = adapter.renderSQLInsertValuesAllStrings(true);
+        assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
     public void renderSQLInsertValues() {
+        String expectedOutput = "(" + threadId   + ", "
+                                    + iteration  + ", "
+                                    + "\"" + threadName + "\", "
+                                    + data
+                                    + ")";
+        String actualOutput = adapter.renderSQLInsertValues();
+        actualOutput = adapter.renderSQLInsertValues();
+        assertEquals(expectedOutput, actualOutput);
     }
 }
