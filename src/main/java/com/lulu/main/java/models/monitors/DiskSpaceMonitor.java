@@ -7,9 +7,7 @@ import java.io.File;
 public class DiskSpaceMonitor extends MetricMonitor {
 
     public DiskSpaceMonitor(String name, int metricCheckingFreq, ReporterConfiguration reporterConfig, String dirToMonitor) {
-        this.name = name;
-        this.metricCheckingFrequency = metricCheckingFreq;
-        this.reporterConfiguration = reporterConfig;
+        super(name, metricCheckingFreq, reporterConfig);
         this.directory = dirToMonitor;
         this.metric = Metric.DISKSPACE;
     }

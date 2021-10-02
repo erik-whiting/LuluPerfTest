@@ -9,9 +9,7 @@ import java.io.InputStreamReader;
 public class OtherMonitor extends MetricMonitor {
 
     public OtherMonitor(String name, int metricCheckingFreq, ReporterConfiguration reporterConfig, String command) {
-        this.name = name;
-        this.metricCheckingFrequency = metricCheckingFreq;
-        this.reporterConfiguration = reporterConfig;
+        super(name, metricCheckingFreq, reporterConfig);
         this.sysCommandForMetric = command;
         this.metric = Metric.OTHER;
     }
