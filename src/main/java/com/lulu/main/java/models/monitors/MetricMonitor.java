@@ -22,6 +22,12 @@ public abstract class MetricMonitor implements Monitoring, Runnable {
     public volatile MonitorOutputTransceiver transceiver;
     public com.sun.management.OperatingSystemMXBean os = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 
+    public MetricMonitor(String name, int metricCheckingFrequency, ReporterConfiguration reporterConfig) {
+        this.name = name;
+        this.metricCheckingFrequency = metricCheckingFrequency;
+        this.reporterConfiguration = reporterConfig;
+    }
+
     public void run() {
         isMonitoring = true;
         long monitorIteration = 1;

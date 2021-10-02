@@ -8,9 +8,7 @@ public class MemoryMonitor extends MetricMonitor {
     public double osMemorySize;
 
     public MemoryMonitor(String name, int metricCheckingFreq, ReporterConfiguration reporterConfig) {
-        this.name = name;
-        this.metricCheckingFrequency = metricCheckingFreq;
-        this.reporterConfiguration = reporterConfig;
+        super(name, metricCheckingFreq, reporterConfig);
         this.isMonitoring = false;
         this.metric = Metric.MEMORY;
         this.osMemorySize = os.getTotalPhysicalMemorySize();

@@ -6,9 +6,7 @@ import java.math.BigDecimal;
 
 public class CpuMonitor extends MetricMonitor {
     public CpuMonitor(String name, int metricCheckingFreq, ReporterConfiguration reporterConfig) {
-        this.name = name;
-        this.metricCheckingFrequency = metricCheckingFreq;
-        this.reporterConfiguration = reporterConfig;
+        super(name, metricCheckingFreq, reporterConfig);
         this.metric = Metric.CPU;
     }
 
