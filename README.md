@@ -1,7 +1,7 @@
 # LuluPerfTest
 
 ## Overview
-LuluPerfTest is a free and open-source technology agnostic non-functional requirements testing framework.
+LuluPerfTest is a free and open-source technology agnostic non-functional requirements (NFR) testing framework.
 The LPT framework aims to provide software engineers and other stakeholders of software quality a FOSS tool
 for quickly creating and easily maintaining NFR test scripts.
 
@@ -15,10 +15,20 @@ users can create custom system metric monitors by returning the desired value vi
 script for the SUT (e.g., BASH, PowerShell, etc.).
 
 ## Testing
-TODO
+LuluPerfTest is built with Apache Maven, so testing is as simple as running
+```shell script
+> mvn test
+```
+from the command line. This will run all the tests located in the `test` package.
+
+However, since this tool is a testing framework on its own, testing of the project
+must evolve to include running a testbed application in which to test this application. The architecture of such
+testing has not yet been designed as this will required a large undertaking of effort. Any suggestions, advice, or
+contributions are welcome in this area.
 
 ## Contributing
-TODO
+Contributors of all kinds are welcome to LuluPerfTest and all contributions, big or small, are appreciated.
+Please visit the [contribution guide](CONTRIBUTING.md). We welcome all kinds of contributions, not just code.
 
 ## Citing
 LuluPerfTest will be presented at ICSIM 2022. After the proceedings are published, this section will note
