@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class DslPrototype {
     public static void main(String[] args) throws IOException, InterruptedException {
-        String pathToJSON = "C:\\Users\\eedee\\technicalstuff\\javastuff\\LuluPerfTest\\src\\com\\lulu\\main\\prototype\\DslPrototype.json";
+        String pathToJSON = "C:\\Users\\eedee\\technicalstuff\\javastuff\\LuluPerfTest\\src\\main\\java\\com\\lulu\\main\\prototype\\DslPrototype.json";
         DslParser parser = new DslParser(pathToJSON);
         parser.run();
     }

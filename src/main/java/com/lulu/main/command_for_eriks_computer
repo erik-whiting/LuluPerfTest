@@ -1,5 +1,0 @@
-"C:\Program Files\Java\jdk-11.0.4\bin\java.exe" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\lib\idea_rt.jar=1175:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.
-1\bin" -Dfile.encoding=UTF-8 -classpath C:\Users\eedee\technicalstuff\javastuff\LuluPerfTest\out\production\LuluPerfTest;C:\Users\eedee\java-json.jar\java-json.jar;C:\Users\eedee\.m2\repository\org\apache\clerezza\ext\org.json.simpl
-e\0.4\org.json.simple-0.4.jar;C:\Users\eedee\.m2\repository\com\googlecode\json-simple\json-simple\1.1\json-simple-1.1.jar com.lulu.main.Main C:\Users\eedee\technicalstuff\javastuff\LuluPerfTest\src\com\lulu\main\prototype\DslProtot
-ype.json
-C:\Users\eedee\technicalstuff\javastuff\LuluPerfTest\src\com\lulu\main\prototype\DslPrototype.json
