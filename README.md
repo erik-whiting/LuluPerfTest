@@ -31,8 +31,8 @@ Contributors of all kinds are welcome to LuluPerfTest and all contributions, big
 Please visit the [contribution guide](CONTRIBUTING.md). We welcome all kinds of contributions, not just code.
 
 ## Citing
-LuluPerfTest will be presented at ICSIM 2022. After the proceedings are published, this section will note
-the paper to be cited. If you use this software, please cite the paper rather than the GitHub link.
+If you use this tool in your research, please cite our paper:
+Erik Whiting and Soma Datta. 2022. Design and Development of a Technology-Agnostic NFR Testing Framework: Introducing the framework and discussing the future of load testing in Agile software development. In 2022 The 5th International Conference on Software Engineering and Information Management (ICSIM) (ICSIM 2022). Association for Computing Machinery, New York, NY, USA, 45–50. DOI:https://doi-org.uhcl.idm.oclc.org/10.1145/3520084.3520092
 
 ## Academic Goals
 While the pragmatic goal of LuluPerfTest is ultimately to alleviate challenges associated with non-functional
