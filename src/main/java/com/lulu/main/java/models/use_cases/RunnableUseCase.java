@@ -16,6 +16,8 @@ public class RunnableUseCase implements Runnable {
     }
 
     public void run() {
+        // TODO: Use the Process class to get information about
+        // the test scripts that are run. (failure, latency, etc)
         isRunning = true;
         System.out.println("Running \"" + executionScript + "\"");
         try {
@@ -25,6 +27,7 @@ public class RunnableUseCase implements Runnable {
             onExit.get();
             onExit.thenAccept(ph_ -> isRunning = false);
         } catch (IOException | InterruptedException | ExecutionException e) {
+            Thread.currentThread().interrupt();
             e.printStackTrace();
             isRunning = false;
         }
