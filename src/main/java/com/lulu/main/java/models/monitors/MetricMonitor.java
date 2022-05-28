@@ -1,10 +1,7 @@
 package com.lulu.main.java.models.monitors;
 
 import com.lulu.main.java.models.configurations.ReporterConfiguration;
-import com.lulu.main.java.models.reporters.MonitorOutputSignal;
-import com.lulu.main.java.models.reporters.MonitorOutputDataAdapter;
 import com.lulu.main.java.models.reporters.MonitorOutputTransceiver;
-import com.lulu.main.java.models.reporters.ReportType;
 
 import java.lang.management.ManagementFactory;
 import java.math.MathContext;
@@ -34,7 +31,7 @@ public abstract class MetricMonitor implements Monitoring, Runnable {
         prepareTransceiver();
         while (isMonitoring) {
             try {
-                Thread.sleep(metricCheckingFrequency);
+                runningMethod();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 e.printStackTrace();
@@ -46,6 +43,18 @@ public abstract class MetricMonitor implements Monitoring, Runnable {
                     monitor()
             );
             monitorIteration++;
+        }
+    }
+
+    private void runningMethod() throws InterruptedException {
+        try {
+            if (Thread.currentThread().isInterrupted()) {
+                stopMonitoring();
+            } else {
+                Thread.sleep(metricCheckingFrequency);
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 
