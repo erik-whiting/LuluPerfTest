@@ -31,7 +31,7 @@ that programmatically simulates a use case. LPT runs these automation scripts ag
 in order to simulate a realistic load against the system. The `useCase` objects are comprised
 of the following attributes:
 * `name`
-*  `script`
+* `script`
 * `command`
 * `threads`
 
@@ -107,7 +107,7 @@ class gathers its configured metric is beyond the scope of this section.
 ## Contribution Workflow
 
 ### Set Up
-LPT is written in Java 11 and is testing with jUnit 4. The project manages all dependencies via
+LPT is written in Java 11 and is tested with jUnit 4. The project manages all dependencies via
 Maven in the root-level [pom.xml](pom.xml) file.
 
 To set up a local version of LPT for contributing, simply clone the repository with:
@@ -121,7 +121,7 @@ Once you've done this, CD into the repository and run the following Maven comman
 ?> mvn compile
 ?> mvn test
 ```
-This will make sure all necessary information is available, compile LPT, and then test that compilation.
+This will make sure all necessary information is available, compile LPT, and then test it.
 If all the tests pass, you're ready to start writing code.
 
 ### Creating a Branch and Pull Request
